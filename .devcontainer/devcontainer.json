@@ -25,7 +25,8 @@
         "redhat.vscode-yaml",
         "mark-tucker.aws-cli-configure",
         "amazonwebservices.amazon-q-vscode",
-        "ms-python.python"
+        "ms-python.python",
+        "amazonwebservices.codewhisperer-for-command-line-companion"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "zsh",
