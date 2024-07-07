@@ -50,6 +50,7 @@ export class UploaderInfraStack extends cdk.Stack {
 
     //Plug the Lambda function into the API Gateway
     const uploadFileResource = api.root.addResource('uploadFile');
+
     uploadFileResource.addMethod('POST', new cdk.aws_apigateway.LambdaIntegration(uploadFileLambda));
     uploadFileResource.addCorsPreflight({
       allowOrigins: ['*'],
