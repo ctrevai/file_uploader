@@ -1,5 +1,4 @@
 import * as cdk from 'aws-cdk-lib';
-import { BackedDataSource } from 'aws-cdk-lib/aws-appsync';
 import { Construct } from 'constructs';
 import { join } from 'path';
 
@@ -12,9 +11,10 @@ export class UploaderInfraStack extends cdk.Stack {
 
     // Create a DynamoDB table to store file metadata
     const filesTable = new cdk.aws_dynamodb.Table(this, 'Files', {
-      partitionKey: { name: 'PK', type: cdk.aws_dynamodb.AttributeType.STRING },
-      sortKey: { name: 'SK', type: cdk.aws_dynamodb.AttributeType.STRING },
+      partitionKey: { name: 'userID', type: cdk.aws_dynamodb.AttributeType.STRING },
+      sortKey: { name: 'fileName', type: cdk.aws_dynamodb.AttributeType.STRING },
       billingMode: cdk.aws_dynamodb.BillingMode.PAY_PER_REQUEST,
+      removalPolicy: cdk.RemovalPolicy.DESTROY
     });
 
     // Create an S3 bucket with CORS enabled
@@ -68,9 +68,8 @@ export class UploaderInfraStack extends cdk.Stack {
       },
     });
 
-    filesTable.grantReadWriteData(listFilesLambda);
-    bucket.grantPut(listFilesLambda);
-    bucket.grantPutAcl(listFilesLambda);
+    filesTable.grantReadData(listFilesLambda);
+    bucket.grantRead(listFilesLambda);
 
     //Plug the Lambda function into the API Gateway
     const listFilesResource = api.root.addResource('listFiles');
