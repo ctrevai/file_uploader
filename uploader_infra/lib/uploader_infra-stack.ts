@@ -79,7 +79,18 @@ export class UploaderInfraStack extends cdk.Stack {
       allowMethods: ['POST'],
     });
 
+    //output resouce names 
+    new cdk.CfnOutput(this, 'TableName', {
+      value: filesTable.tableName,
+      description: 'DynamoDB table name',
+      exportName: 'TableName',
+    });
 
+    new cdk.CfnOutput(this, 'BucketName', {
+      value: bucket.bucketName,
+      description: 'S3 bucket name',
+      exportName: 'BucketName',
+    });
 
 
   }

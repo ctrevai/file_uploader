@@ -16,13 +16,7 @@ def lambda_handler(event, context):
     print(user)
 
     print(table_name)
-    #get item from dynamodb
-    # response = table.get_item(
-    #     Key={
-    #         'userID': user
-    #     }
-    # )
-    
+    #get item from userID 
     response = table.query(
         KeyConditionExpression=Key('userID').eq(user)
     )

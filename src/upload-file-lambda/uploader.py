@@ -26,17 +26,12 @@ def lambda_handler(event, context):
     )
     
     #Generate a presigned URL for the S3 object
-    presigned_url = s3_client.generate_presigned_url(
-        'put_object',
-        Params={
-            'Bucket': bucket_name,
-            'Key': file_name,
-            'Expires': 30
-        },
-        HttpMethod='PUT',
+    response = s3_client.generate_presigned_post(
+        Bucket=bucket_name,
+        Key=file_name,
+        ExpiresIn=30
     )
-    print(presigned_url)
-    response = {'user': str(user), 'filename': str(file_name), 'uploadurl': presigned_url}
+    
     print(response)
     # Return the presigned URL
     return {
