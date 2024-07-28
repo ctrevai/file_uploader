@@ -26,7 +26,8 @@
         "mark-tucker.aws-cli-configure",
         "amazonwebservices.amazon-q-vscode",
         "ms-python.python",
-        "amazonwebservices.codewhisperer-for-command-line-companion"
+        "amazonwebservices.codewhisperer-for-command-line-companion",
+        "tomoki1207.pdf"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "zsh",
