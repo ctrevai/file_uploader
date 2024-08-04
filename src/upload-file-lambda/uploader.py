@@ -27,11 +27,9 @@ def lambda_handler(event, context):
     
     #Generate a presigned URL for the S3 object
     response = s3_client.generate_presigned_post(
-        Bucket=bucket_name,
-        Key=file_name,
-        ExpiresIn=30
-    )
-    
+        bucket_name, 
+        file_name, 
+        ExpiresIn=300)
     print(response)
     # Return the presigned URL
     return {
@@ -41,5 +39,6 @@ def lambda_handler(event, context):
     
 if __name__ == '__main__':
     event = {'body' : '{ "user": "localuser", "filename": "local_test.pdf"}'}
-    print(lambda_handler(event, None))
+    response = lambda_handler(event, None)
+    print(response)
     
